@@ -1,5 +1,6 @@
 package com.company;
 
+import com.company.devices.Car;
 import java.time.format.DateTimeFormatter;
 
 public class Main {
@@ -42,7 +43,15 @@ public class Main {
         me.pet.feed();
         me.pet.takeForAWalk();
 
-        Car ticomotywa = new Car("Daewoo", "Tico", 796, 41);
+        Car ticomotywa = new Car("Daewoo", "Tico", 796, 41, 4206.9);
         me.setVehicle(ticomotywa);
+
+        Car ticomotywa2 = new Car("Daewoo", "Tico", 796, 41, 4206.9);
+
+        System.out.println("-----------------------------------------------------------------------------------------");
+        System.out.println(ticomotywa == ticomotywa2);
+        System.out.println(ticomotywa);
+        System.out.println(ticomotywa2);
+        System.out.println(me.pet);
     }
 }

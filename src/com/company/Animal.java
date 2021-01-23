@@ -33,4 +33,12 @@ public class Animal {
         }
         else System.out.println("Erm... Dragging a not-very-alive body is not necessarily \"taking for a walk\" you know...");
     }
+
+    @Override
+    public String toString() {
+        return "Animal{" +
+                "species='" + species + '\'' +
+                ", weight=" + weight +
+                '}';
+    }
 }
