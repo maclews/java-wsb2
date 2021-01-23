@@ -1,6 +1,9 @@
-package com.company;
+package com.company.creatures;
 
-public class Animal implements Sellable{
+import com.company.Human;
+import com.company.Sellable;
+
+public class Animal implements Sellable, Feedable {
     final String species;
     private Double weight;
 
@@ -26,6 +29,14 @@ public class Animal implements Sellable{
         else System.out.println("Better check Yellow Pages for a Necromancer or something...");
     }
 
+    public void feed(Double foodWeight) {
+        if (isAlive()) {
+            this.weight += foodWeight;
+            System.out.println("Fed. Weight increased to " + this.weight + " kg");
+        }
+        else System.out.println("Better check Yellow Pages for a Necromancer or something...");
+    }
+
     public void takeForAWalk() {
         if (isAlive()) {
             this.weight--;
@@ -34,6 +45,7 @@ public class Animal implements Sellable{
         else System.out.println("Erm... Dragging a not-very-alive body is not necessarily \"taking for a walk\" you know...");
     }
 
+    @Override
     public void sell(Human seller, Human buyer, Double price) {
         if (seller.pet != null) {
             if (buyer.getCash() >= price) {

@@ -25,6 +25,7 @@ public class Car extends Device implements Sellable {
                 " odpalana z samego rana Ticomotywa...");
     }
 
+    @Override
     public void sell(Human seller, Human buyer, Double price) {
         if (seller.getVehicle() != null) {
             if (buyer.getCash() >= price) {

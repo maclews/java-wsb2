@@ -1,5 +1,6 @@
 package com.company;
 
+import com.company.creatures.Pet;
 import com.company.devices.Car;
 import com.company.devices.Phone;
 import java.time.format.DateTimeFormatter;
@@ -14,7 +15,7 @@ public class Main {
 
         me.firstName = "Maciej";
         me.lastName = "Lewandowski";
-        me.pet = new Animal("dog");
+        me.pet = new Pet("dog");
 
         me.pet.feed();
         me.pet.takeForAWalk();
