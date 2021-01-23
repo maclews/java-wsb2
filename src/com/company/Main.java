@@ -1,8 +1,12 @@
 package com.company;
 
+import java.time.format.DateTimeFormatter;
+
 public class Main {
 
     public static void main(String[] args) {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
+
         Human me = new Human();
 
         me.firstName = "Maciej";
