@@ -1,6 +1,9 @@
 package com.company.devices;
 
-public class Car extends Device {
+import com.company.Human;
+import com.company.Sellable;
+
+public class Car extends Device implements Sellable {
     final String manufacturer;
     final String model;
     Integer displacement;
@@ -14,11 +17,28 @@ public class Car extends Device {
         this.model = model;
         this.displacement = displacement;
         this.enginePower = enginePower;
+        this.price = price;
     }
 
     public void turnOn() {
         System.out.println("Słychać piękne wycie trzycilindrowej osiemsetki. No bo nie ma na świecie nic lepszego niż" +
                 " odpalana z samego rana Ticomotywa...");
+    }
+
+    public void sell(Human seller, Human buyer, Double price) {
+        if (seller.getVehicle() != null) {
+            if (buyer.getCash() >= price) {
+                buyer.setCash(buyer.getCash() - price);
+                seller.setCash(seller.getCash() + price);
+                buyer.receiveVehicle(seller.getVehicle());
+                seller.unsetVehicle();
+                System.out.println("Pojazd został sprzedany nowemu właścicielowi.");
+            } else {
+                System.out.println("Za mało siana.");
+            }
+        } else {
+            System.out.println("Lewizna. Sprzedający nie ma pojazdu.");
+        }
     }
 
     @Override
