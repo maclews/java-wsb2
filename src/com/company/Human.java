@@ -6,7 +6,7 @@ public class Human {
     String firstName;
     String lastName;
     Animal pet;
-    Car vehicle;
+    private Car vehicle;
     private Double salary;
     private LocalDateTime salaryLastAccessDateTime;
     private Double salaryLastAccessValue;
@@ -33,6 +33,22 @@ public class Human {
             System.out.println("[PL] Wymagany jest odbiór aneksu do umowy od pani Krysi z kadr.");
             System.out.println("[PL] ZUS i US zostały poinformowane o zmianie wypłaty - prosimy nie ukrywać dochodu.");
             this.salary = salary;
+        }
+    }
+
+    public Car getVehicle() {
+        return vehicle;
+    }
+
+    public void setVehicle(Car newCar) {
+        if (this.salary > newCar.price) {
+            this.vehicle = newCar;
+            System.out.println("New car bought in CASH");
+        } else if (this.salary > (newCar.price / 12)) {
+            this.vehicle = newCar;
+            System.out.println("New car bought with CREDIT");
+        } else {
+            System.out.println("Get yourself a better job or something first");
         }
     }
 }

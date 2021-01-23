@@ -42,6 +42,7 @@ public class Main {
         me.pet.feed();
         me.pet.takeForAWalk();
 
-        me.vehicle = new Car("Daewoo","Tico",796,41);
+        Car ticomotywa = new Car("Daewoo", "Tico", 796, 41);
+        me.setVehicle(ticomotywa);
     }
 }
