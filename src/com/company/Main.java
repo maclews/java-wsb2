@@ -1,14 +1,20 @@
 package com.company;
 
 import com.company.creatures.Pet;
-import com.company.devices.Car;
+import com.company.devices.LPG;
+import com.company.devices.Diesel;
+import com.company.devices.Electric;
 import com.company.devices.Phone;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.Objects;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws MalformedURLException {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
 
         Human me = new Human();
@@ -46,10 +52,10 @@ public class Main {
         me.pet.feed();
         me.pet.takeForAWalk();
 
-        Car ticomotywa = new Car("Daewoo", "Tico", 1999, 796, 41, 4206.9);
+        LPG ticomotywa = new LPG("Daewoo", "Tico", 1999, 796, 41, 4206.9);
         me.setVehicle(ticomotywa);
 
-        Car ticomotywa2 = new Car("Daewoo", "Tico", 1999, 796, 41, 4206.9);
+        LPG ticomotywa2 = new LPG("Daewoo", "Tico", 1999, 796, 41, 4206.9);
 
         System.out.println("-----------------------------------------------------------------------------------------");
         System.out.println(Objects.equals(ticomotywa, ticomotywa2));
@@ -79,5 +85,22 @@ public class Main {
         me.tel = brick;
         me.tel.sell(me, notMe, 1500.0);
         System.out.println(me.cash + " -- " + notMe.cash);
+
+        Electric tesla = new Electric("Tesla", "Model S", 2018, 0, 613, 50000.0);
+        Diesel passat = new Diesel("Król wsi", "w TDI", 1998, 1900, 90, 500.0);
+
+        notMe.getVehicle().refuel();
+        me.receiveVehicle(tesla);
+        me.getVehicle().refuel();
+        me.receiveVehicle(passat);
+        me.getVehicle().refuel();
+
+        brick.installApp("Dialer");
+        brick.installApp("Flashlight", "2.0");
+        brick.installApp("SmokeDetector", "4.20", "apphub.com");
+        brick.installApp("Calculator", "Camera", "WebBrowser");
+        brick.installApp(new URL("https://play.google.com/store/apps/details?id=com.android.chrome"));
+        brick.installApp("Flashlight", "2.0");
+        brick.installApp("Flashlight", "2.1");
     }
 }

@@ -1,10 +1,34 @@
 package com.company.devices;
 
 import com.company.Human;
+import java.net.URL;
+import java.util.Collections;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Phone extends Device {
+    static final String DEFAULT_APP_SERVER_NAME = "www.example.com";
+    static final String DEFAULT_APP_SERVER_PROTOCOL = "https";
+    static final String DEFAULT_APP_VERSION = "1.0";
+    List<String> appList;
+
+    private Integer findAppOnList(String appName) {
+        Collections.sort(this.appList);
+        return Collections.binarySearch(this.appList, appName);
+    }
+
+    private void putOnAppList(String appName) {
+        if (this.findAppOnList(appName) < 0) {
+            this.appList.add(appName);
+            System.out.println("[  OK  ] App from " + appName + " successfully installed.");
+        } else {
+            System.out.println("[ FAIL ] App from " + appName + " already installed.");
+        }
+    }
+
     public Phone(String manufacturer, String model, Integer yearOfProduction) {
         super(manufacturer, model, yearOfProduction);
+        this.appList = new ArrayList<>();
     }
 
     public void turnOn() {
@@ -22,6 +46,52 @@ public class Phone extends Device {
             System.out.println("Za mało siana.");
         }
     }
+
+    public void installApp(String appName) {
+        this.putOnAppList(
+                DEFAULT_APP_SERVER_PROTOCOL
+                        + "://" + DEFAULT_APP_SERVER_NAME
+                        + "/" + appName
+                        + "?v=" + DEFAULT_APP_VERSION
+        );
+    }
+    public void installApp(String appName, String appVersion) {
+        this.putOnAppList(
+                DEFAULT_APP_SERVER_PROTOCOL
+                        + "://" + DEFAULT_APP_SERVER_NAME
+                        + "/" + appName
+                        + "?v=" + appVersion
+        );
+    }
+    public void installApp(String appName, String appVersion, String serverAddr) {
+        this.putOnAppList(
+                DEFAULT_APP_SERVER_PROTOCOL
+                        + "://" + serverAddr
+                        + "/" + appName
+                        + "?v=" + appVersion
+        );
+    }
+    public void installApp(String[] appNameList) {
+        for (String appName : appNameList) {
+            this.putOnAppList(
+                    DEFAULT_APP_SERVER_PROTOCOL
+                            + "://" + DEFAULT_APP_SERVER_NAME
+                            + "/" + appName
+                            + "?v=" + DEFAULT_APP_VERSION
+            );
+
+        }
+    }
+    public void installApp(URL urlToApp) {
+        this.putOnAppList(
+                urlToApp.getProtocol()
+                        + "://" + urlToApp.getHost()
+                        + urlToApp.getPath()
+                        + "?" + urlToApp.getQuery()
+        );
+
+    }
+
 
     @Override
     public String toString() {

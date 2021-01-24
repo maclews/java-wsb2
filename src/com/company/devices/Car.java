@@ -3,7 +3,7 @@ package com.company.devices;
 import com.company.Human;
 import com.company.Sellable;
 
-public class Car extends Device implements Sellable {
+public abstract class Car extends Device implements Sellable {
     final String manufacturer;
     final String model;
     Integer displacement;
@@ -20,9 +20,10 @@ public class Car extends Device implements Sellable {
         this.price = price;
     }
 
+    public abstract void refuel();
+
     public void turnOn() {
-        System.out.println("Słychać piękne wycie trzycilindrowej osiemsetki. No bo nie ma na świecie nic lepszego niż" +
-                " odpalana z samego rana Ticomotywa...");
+        System.out.println("No mówiłem, że pali na dotyk...");
     }
 
     @Override
