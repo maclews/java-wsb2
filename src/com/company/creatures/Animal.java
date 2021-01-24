@@ -46,7 +46,7 @@ public class Animal implements Sellable, Feedable {
     }
 
     @Override
-    public void sell(Human seller, Human buyer, Double price) {
+    public void sell(Human seller, Human buyer, Double price, Integer sellSpot, Integer buySpot) {
         if (seller.pet != null) {
             if (buyer.getCash() >= price) {
                 buyer.setCash(buyer.getCash() - price);

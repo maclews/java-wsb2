@@ -3,7 +3,7 @@ package com.company.devices;
 import com.company.Human;
 import com.company.Sellable;
 
-public abstract class Car extends Device implements Sellable {
+public abstract class Car extends Device implements Sellable{
     final String manufacturer;
     final String model;
     Integer displacement;
@@ -27,19 +27,21 @@ public abstract class Car extends Device implements Sellable {
     }
 
     @Override
-    public void sell(Human seller, Human buyer, Double price) {
-        if (seller.getVehicle() != null) {
+    public void sell(Human seller, Human buyer, Double price, Integer sellSpot, Integer buySpot) {
+        if (seller.getVehicle(sellSpot) != null) {
+            int buyerSpot = buyer.returnFreeSpot();
+            if (buyerSpot < 0) throw new IndexOutOfBoundsException("Kupujący nie ma miejsca w garażu.");
             if (buyer.getCash() >= price) {
                 buyer.setCash(buyer.getCash() - price);
                 seller.setCash(seller.getCash() + price);
-                buyer.receiveVehicle(seller.getVehicle());
-                seller.unsetVehicle();
-                System.out.println("Pojazd został sprzedany nowemu właścicielowi.");
+                buyer.receiveVehicle(buySpot, seller.getVehicle(sellSpot));
+                seller.unsetVehicle(sellSpot);
+                System.out.println("Pojazd został sprzedany nowemu właścicielowi za " + price);
             } else {
-                System.out.println("Za mało siana.");
+                throw new ArithmeticException("Za mało siana.");
             }
         } else {
-            System.out.println("Lewizna. Sprzedający nie ma pojazdu.");
+            throw new NullPointerException("Lewizna. Sprzedający nie ma pojazdu.");
         }
     }
 

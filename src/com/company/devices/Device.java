@@ -3,7 +3,7 @@ package com.company.devices;
 public abstract class Device {
     final String manufacturer;
     final String model;
-    final Integer yearOfProduction;
+    public final Integer yearOfProduction;
 
     protected Device(String manufacturer, String model, Integer yearOfProduction) {
         this.manufacturer = manufacturer;

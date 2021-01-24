@@ -53,7 +53,7 @@ public class Main {
         me.pet.takeForAWalk();
 
         LPG ticomotywa = new LPG("Daewoo", "Tico", 1999, 796, 41, 4206.9);
-        me.setVehicle(ticomotywa);
+        me.setVehicle(0, ticomotywa);
 
         LPG ticomotywa2 = new LPG("Daewoo", "Tico", 1999, 796, 41, 4206.9);
 
@@ -76,24 +76,24 @@ public class Main {
         me.cash = 10000.0;
         notMe.cash = 20000.0;
 
-        me.pet.sell(me, notMe, 500.0);
+        me.pet.sell(me, notMe, 500.0, null, null);
         System.out.println(me.cash + " -- " + notMe.cash);
 
-        me.getVehicle().sell(me, notMe, 2000.0);
+        me.getVehicle(0).sell(me, notMe, 2000.0, 0, 0);
         System.out.println(me.cash + " -- " + notMe.cash);
 
         me.tel = brick;
-        me.tel.sell(me, notMe, 1500.0);
+        me.tel.sell(me, notMe, 1500.0, null, null);
         System.out.println(me.cash + " -- " + notMe.cash);
 
         Electric tesla = new Electric("Tesla", "Model S", 2018, 0, 613, 50000.0);
         Diesel passat = new Diesel("Król wsi", "w TDI", 1998, 1900, 90, 500.0);
 
-        notMe.getVehicle().refuel();
-        me.receiveVehicle(tesla);
-        me.getVehicle().refuel();
-        me.receiveVehicle(passat);
-        me.getVehicle().refuel();
+        notMe.getVehicle(0).refuel();
+        me.receiveVehicle(1,tesla);
+        me.getVehicle(1).refuel();
+        me.receiveVehicle(2, passat);
+        me.getVehicle(2).refuel();
 
         brick.installApp("Dialer");
         brick.installApp("Flashlight", "2.0");
@@ -102,5 +102,12 @@ public class Main {
         brick.installApp(new URL("https://play.google.com/store/apps/details?id=com.android.chrome"));
         brick.installApp("Flashlight", "2.0");
         brick.installApp("Flashlight", "2.1");
+
+        System.out.println("GARAGE TOTAL VALUE: " + me.getGarageValue());
+
+        me.garageSort();
+
+        me.listGarage();
+        notMe.listGarage();
     }
 }
