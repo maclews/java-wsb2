@@ -109,5 +109,12 @@ public class Main {
 
         me.listGarage();
         notMe.listGarage();
+
+        System.out.println(notMe.getVehicle(0).saleCheck(notMe, me));
+        System.out.println(notMe.getVehicle(0).getLastOwner());
+        System.out.println(notMe.getVehicle(0).wasOwnedBy(me));
+        System.out.println(notMe.getVehicle(0).saleCheck(me, notMe));
+        System.out.println("Transakcji kupna/sprzedaży: " + notMe.getVehicle(0).saleCount());
+        System.out.println(notMe.getVehicle(0).getLastSale());
     }
 }

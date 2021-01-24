@@ -24,6 +24,8 @@ public class Human {
         this.salaryLastAccessDateTime = LocalDateTime.now();
         this.salaryLastAccessValue = this.salary;
         this.pet = null;
+        this.firstName = "NoFirstNameSet";
+        this.lastName = "NoLastNameSet";
         this.prepGarage();
     }
 
@@ -81,9 +83,11 @@ public class Human {
             if (this.salary > newCar.price) {
                 this.garage[space] = newCar;
                 System.out.println("New car bought in CASH");
+                this.garage[space].ownerList.add(this);
             } else if (this.salary > (newCar.price / 12)) {
                 this.garage[space] = newCar;
                 System.out.println("New car bought with CREDIT");
+                this.garage[space].ownerList.add(this);
             } else {
                 System.out.println("Get yourself a better job or something first");
             }
