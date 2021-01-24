@@ -4,15 +4,14 @@ import com.company.Human;
 import com.company.Sellable;
 
 import java.net.URL;
-import java.util.Collections;
-import java.util.List;
-import java.util.ArrayList;
+import java.util.*;
 
 public class Phone extends Device implements Sellable {
     static final String DEFAULT_APP_SERVER_NAME = "www.example.com";
     static final String DEFAULT_APP_SERVER_PROTOCOL = "https";
     static final String DEFAULT_APP_VERSION = "1.0";
     List<String> appList;
+    List<Application> applicationList;
 
     private Integer findAppOnList(String appName) {
         Collections.sort(this.appList);
@@ -31,6 +30,7 @@ public class Phone extends Device implements Sellable {
     public Phone(String manufacturer, String model, Integer yearOfProduction) {
         super(manufacturer, model, yearOfProduction);
         this.appList = new ArrayList<>();
+        this.applicationList = new ArrayList<>();
     }
 
     public void turnOn() {
@@ -46,6 +46,61 @@ public class Phone extends Device implements Sellable {
             System.out.println("Telefon został sprzedany nowemu właścicielowi.");
         } else {
             System.out.println("Za mało siana.");
+        }
+    }
+
+    public void installApp(String appName, Double priceTag, Human customer) throws Exception {
+        if (customer.getCash() >= priceTag) {
+            if (this.checkInstalled(appName)) {
+                throw new Exception("Application " + appName + " already installed.");
+            } else {
+                this.applicationList.add(new Application(appName, DEFAULT_APP_VERSION, priceTag));
+                customer.setCash(customer.getCash() - priceTag);
+            }
+        } else {
+            throw new ArithmeticException("Insufficient funds.");
+        }
+    }
+
+    public boolean checkInstalled(Application app) {
+        return this.applicationList.contains(app);
+    }
+
+    public boolean checkInstalled(String appName) {
+        for (Application app : this.applicationList) {
+            if (app.getName().equals(appName)) return true;
+        }
+        return false;
+    }
+
+    public void listFreeApps() {
+        System.out.println("--- FREE APPS LIST ---");
+        for (Application app : this.applicationList) {
+            if (app.getPrice().equals(0.0)) System.out.println(app);
+        }
+    }
+
+    public Double sumAllPaidApps() {
+        Double total = 0.0;
+        for (Application app : this.applicationList) {
+            if (app.getPrice() > 0.0) total += app.getPrice();
+        }
+        return total;
+    }
+
+    public void listAppsSortByName() {
+        System.out.println("--- APPS LIST BY NAME ---");
+        Collections.sort(this.applicationList);
+        for (Application app : this.applicationList) {
+            System.out.println(app);
+        }
+    }
+
+    public void listAppsSortByPrice() {
+        System.out.println("--- APPS LIST BY PRICE ---");
+        this.applicationList.sort((a1, a2) -> ((int) (a2.getPrice() * 1000) - (int) (a1.getPrice() * 1000)));
+        for (Application app : this.applicationList) {
+            System.out.println(app);
         }
     }
 

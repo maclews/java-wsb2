@@ -1,10 +1,7 @@
 package com.company;
 
 import com.company.creatures.Pet;
-import com.company.devices.LPG;
-import com.company.devices.Diesel;
-import com.company.devices.Electric;
-import com.company.devices.Phone;
+import com.company.devices.*;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -14,7 +11,7 @@ import java.util.Objects;
 
 public class Main {
 
-    public static void main(String[] args) throws MalformedURLException {
+    public static void main(String[] args) throws Exception {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
 
         Human me = new Human();
@@ -116,5 +113,25 @@ public class Main {
         System.out.println(notMe.getVehicle(0).saleCheck(me, notMe));
         System.out.println("Transakcji kupna/sprzedaży: " + notMe.getVehicle(0).saleCount());
         System.out.println(notMe.getVehicle(0).getLastSale());
+
+        me.tel = new Phone("Huawei", "P500", 2021);
+        me.tel.installApp("App1", 0.0, me);
+        me.tel.installApp("App2", 0.0, me);
+        me.tel.installApp("App3", 2.2, me);
+        me.tel.installApp("App4", 420.0, me);
+        me.tel.installApp("App5", 20.0, me);
+        me.tel.installApp("App6", 0.0, me);
+        me.tel.installApp("App7", 69.0, me);
+        me.tel.installApp("App8", 0.0, me);
+        me.tel.installApp("App9", 0.0, me);
+        me.tel.installApp("App10", 0.0, me);
+        //me.tel.installApp("LegitNotScamHonest", 1000000.0, me);   // wykomentowane bo rzuca wyjątkiem (poprawnie),
+        //me.tel.installApp("App7", 69.0, me);                      // a trzeba sprawdzić czy reszta działa
+
+        System.out.println(me.tel.checkInstalled(new Application("App4", "1.0", 420.0)));
+        me.tel.listFreeApps();
+        me.tel.listAppsSortByName();
+        me.tel.listAppsSortByPrice();
+        System.out.println("Paid apps sum = " + me.tel.sumAllPaidApps());
     }
 }
